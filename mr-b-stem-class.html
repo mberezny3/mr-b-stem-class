@@ -1,0 +1,1218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mr. B's STEM Class | Manville NJ</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-primary: #0a0a0f;
+            --bg-secondary: #12121a;
+            --bg-card: #1a1a24;
+            --accent-cyan: #00f5ff;
+            --accent-purple: #a855f7;
+            --accent-pink: #f472b6;
+            --accent-green: #22c55e;
+            --accent-orange: #f97316;
+            --text-primary: #ffffff;
+            --text-secondary: #94a3b8;
+            --text-muted: #64748b;
+            --glow-cyan: 0 0 30px rgba(0, 245, 255, 0.3);
+            --glow-purple: 0 0 30px rgba(168, 85, 247, 0.3);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Outfit', sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Animated Background */
+        .bg-grid {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(0, 245, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 245, 255, 0.03) 1px, transparent 1px);
+            background-size: 50px 50px;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .floating-orb {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.4;
+            pointer-events: none;
+            animation: float 20s ease-in-out infinite;
+        }
+
+        .orb-1 {
+            width: 400px;
+            height: 400px;
+            background: var(--accent-cyan);
+            top: -100px;
+            right: -100px;
+            animation-delay: 0s;
+        }
+
+        .orb-2 {
+            width: 300px;
+            height: 300px;
+            background: var(--accent-purple);
+            bottom: 20%;
+            left: -100px;
+            animation-delay: -10s;
+        }
+
+        .orb-3 {
+            width: 250px;
+            height: 250px;
+            background: var(--accent-pink);
+            top: 50%;
+            right: 10%;
+            animation-delay: -5s;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            25% { transform: translate(30px, -30px) scale(1.1); }
+            50% { transform: translate(-20px, 20px) scale(0.95); }
+            75% { transform: translate(20px, 30px) scale(1.05); }
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            padding: 1rem 2rem;
+            background: rgba(10, 10, 15, 0.8);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .nav-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            text-decoration: none;
+        }
+
+        .logo-icon {
+            width: 42px;
+            height: 42px;
+            background: linear-gradient(135deg, var(--accent-cyan), var(--accent-purple));
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 1.2rem;
+            color: var(--bg-primary);
+            box-shadow: var(--glow-cyan);
+        }
+
+        .logo-text {
+            font-weight: 700;
+            font-size: 1.25rem;
+            color: var(--text-primary);
+        }
+
+        .logo-text span {
+            color: var(--accent-cyan);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent-cyan);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent-cyan);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .demo-badge {
+            background: linear-gradient(135deg, var(--accent-orange), var(--accent-pink));
+            padding: 0.5rem 1rem;
+            border-radius: 100px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.8; transform: scale(1.02); }
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 6rem 2rem 4rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-content {
+            max-width: 900px;
+            text-align: center;
+        }
+
+        .hero-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(0, 245, 255, 0.1);
+            border: 1px solid rgba(0, 245, 255, 0.2);
+            padding: 0.5rem 1.25rem;
+            border-radius: 100px;
+            font-family: 'Space Mono', monospace;
+            font-size: 0.85rem;
+            color: var(--accent-cyan);
+            margin-bottom: 2rem;
+            animation: slideDown 0.8s ease-out;
+        }
+
+        .hero-tag::before {
+            content: '';
+            width: 8px;
+            height: 8px;
+            background: var(--accent-green);
+            border-radius: 50%;
+            animation: blink 1.5s ease-in-out infinite;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.3; }
+        }
+
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .hero h1 {
+            font-size: clamp(3rem, 8vw, 5.5rem);
+            font-weight: 900;
+            line-height: 1.05;
+            margin-bottom: 1.5rem;
+            animation: slideUp 0.8s ease-out 0.2s both;
+        }
+
+        .hero h1 .gradient-text {
+            background: linear-gradient(135deg, var(--accent-cyan) 0%, var(--accent-purple) 50%, var(--accent-pink) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .hero-subtitle {
+            font-size: 1.35rem;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto 2.5rem;
+            animation: slideUp 0.8s ease-out 0.4s both;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            animation: slideUp 0.8s ease-out 0.6s both;
+        }
+
+        .btn {
+            padding: 1rem 2rem;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 1rem;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--accent-cyan), var(--accent-purple));
+            color: var(--bg-primary);
+            box-shadow: var(--glow-cyan);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 0 50px rgba(0, 245, 255, 0.5);
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--text-primary);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: var(--accent-cyan);
+        }
+
+        .hero-stats {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            margin-top: 4rem;
+            animation: slideUp 0.8s ease-out 0.8s both;
+        }
+
+        .stat {
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--accent-cyan);
+            font-family: 'Space Mono', monospace;
+        }
+
+        .stat-label {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-top: 0.25rem;
+        }
+
+        /* Easter egg tooltip */
+        .easter-egg {
+            position: relative;
+            cursor: help;
+        }
+
+        .easter-egg::after {
+            content: attr(data-secret);
+            position: absolute;
+            bottom: 100%;
+            left: 50%;
+            transform: translateX(-50%) translateY(10px);
+            background: var(--bg-card);
+            border: 1px solid var(--accent-purple);
+            padding: 0.75rem 1rem;
+            border-radius: 8px;
+            font-size: 0.8rem;
+            white-space: nowrap;
+            opacity: 0;
+            pointer-events: none;
+            transition: all 0.3s ease;
+            z-index: 10;
+        }
+
+        .easter-egg:hover::after {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+        }
+
+        /* Features Section */
+        .section {
+            padding: 6rem 2rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .section-header {
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto 4rem;
+        }
+
+        .section-tag {
+            font-family: 'Space Mono', monospace;
+            font-size: 0.85rem;
+            color: var(--accent-purple);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 1rem;
+        }
+
+        .section-title {
+            font-size: clamp(2rem, 5vw, 3rem);
+            font-weight: 800;
+            margin-bottom: 1rem;
+        }
+
+        .section-subtitle {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 1.5rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .feature-card {
+            background: var(--bg-card);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            padding: 2rem;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--accent-cyan), var(--accent-purple));
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(0, 245, 255, 0.2);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .feature-card:hover::before {
+            opacity: 1;
+        }
+
+        .feature-icon {
+            width: 56px;
+            height: 56px;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin-bottom: 1.25rem;
+        }
+
+        .feature-icon.cyan { background: rgba(0, 245, 255, 0.15); }
+        .feature-icon.purple { background: rgba(168, 85, 247, 0.15); }
+        .feature-icon.pink { background: rgba(244, 114, 182, 0.15); }
+        .feature-icon.green { background: rgba(34, 197, 94, 0.15); }
+        .feature-icon.orange { background: rgba(249, 115, 22, 0.15); }
+
+        .feature-card h3 {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 0.75rem;
+        }
+
+        .feature-card p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            line-height: 1.7;
+        }
+
+        .feature-card .secret-note {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            margin-top: 1rem;
+            font-style: italic;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .feature-card:hover .secret-note {
+            opacity: 1;
+        }
+
+        /* STEAM Quest Section */
+        .steam-section {
+            background: linear-gradient(180deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
+        }
+
+        .steam-showcase {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .steam-visual {
+            position: relative;
+        }
+
+        .steam-card-stack {
+            position: relative;
+            height: 400px;
+        }
+
+        .steam-card {
+            position: absolute;
+            width: 280px;
+            background: var(--bg-card);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 1.5rem;
+            transition: all 0.4s ease;
+        }
+
+        .steam-card:nth-child(1) {
+            top: 0;
+            left: 0;
+            z-index: 3;
+            transform: rotate(-5deg);
+        }
+
+        .steam-card:nth-child(2) {
+            top: 60px;
+            left: 80px;
+            z-index: 2;
+            transform: rotate(3deg);
+        }
+
+        .steam-card:nth-child(3) {
+            top: 120px;
+            left: 160px;
+            z-index: 1;
+            transform: rotate(-2deg);
+        }
+
+        .steam-card:hover {
+            z-index: 10;
+            transform: rotate(0deg) scale(1.05);
+            box-shadow: var(--glow-purple);
+        }
+
+        .steam-card-icon {
+            font-size: 2rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .steam-card h4 {
+            font-size: 1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .steam-card p {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        .steam-content h2 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+        }
+
+        .steam-content h2 span {
+            background: linear-gradient(135deg, var(--accent-orange), var(--accent-pink));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .steam-content p {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+            line-height: 1.8;
+        }
+
+        .steam-features {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .steam-feature {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .steam-feature-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            background: rgba(0, 245, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .steam-feature span {
+            font-weight: 500;
+        }
+
+        /* Schedule Section */
+        .schedule-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .schedule-item {
+            background: var(--bg-card);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 16px;
+            padding: 1.5rem;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .schedule-item:hover {
+            border-color: var(--accent-cyan);
+            transform: scale(1.02);
+        }
+
+        .schedule-day {
+            font-family: 'Space Mono', monospace;
+            font-size: 0.8rem;
+            color: var(--accent-cyan);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 0.5rem;
+        }
+
+        .schedule-activity {
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+        }
+
+        .schedule-desc {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        /* Quote Section */
+        .quote-section {
+            background: linear-gradient(135deg, rgba(168, 85, 247, 0.1) 0%, rgba(0, 245, 255, 0.1) 100%);
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .quote-content {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .quote-text {
+            font-size: clamp(1.5rem, 4vw, 2.5rem);
+            font-weight: 300;
+            font-style: italic;
+            line-height: 1.5;
+            margin-bottom: 1.5rem;
+        }
+
+        .quote-author {
+            color: var(--text-muted);
+            font-family: 'Space Mono', monospace;
+            font-size: 0.9rem;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--bg-secondary);
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 4rem 2rem 2rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: start;
+            flex-wrap: wrap;
+            gap: 3rem;
+            margin-bottom: 3rem;
+            padding-bottom: 3rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .footer-brand {
+            max-width: 300px;
+        }
+
+        .footer-brand p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-top: 1rem;
+            line-height: 1.7;
+        }
+
+        .footer-links-group {
+            display: flex;
+            gap: 4rem;
+        }
+
+        .footer-links h4 {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+        }
+
+        .footer-links ul {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .footer-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--accent-cyan);
+        }
+
+        .footer-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .footer-bottom p {
+            color: var(--text-muted);
+            font-size: 0.85rem;
+        }
+
+        .footer-bottom .secret {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            opacity: 0.5;
+            transition: opacity 0.3s ease;
+        }
+
+        .footer-bottom .secret:hover {
+            opacity: 1;
+            color: var(--accent-purple);
+        }
+
+        /* Demo Banner */
+        .demo-banner {
+            position: fixed;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--bg-card);
+            border: 1px solid var(--accent-orange);
+            border-radius: 16px;
+            padding: 1rem 2rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            z-index: 100;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+            animation: slideInUp 0.5s ease-out 1s both;
+        }
+
+        @keyframes slideInUp {
+            from { opacity: 0; transform: translateX(-50%) translateY(30px); }
+            to { opacity: 1; transform: translateX(-50%) translateY(0); }
+        }
+
+        .demo-banner-icon {
+            font-size: 1.5rem;
+        }
+
+        .demo-banner-text {
+            font-size: 0.9rem;
+        }
+
+        .demo-banner-text strong {
+            color: var(--accent-orange);
+        }
+
+        .demo-banner-close {
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            cursor: pointer;
+            padding: 0.25rem;
+            font-size: 1.2rem;
+            line-height: 1;
+        }
+
+        .demo-banner-close:hover {
+            color: var(--text-primary);
+        }
+
+        /* Hidden Easter Egg */
+        .konami-reward {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: var(--bg-card);
+            border: 2px solid var(--accent-green);
+            border-radius: 20px;
+            padding: 3rem;
+            text-align: center;
+            z-index: 1000;
+            box-shadow: 0 0 100px rgba(34, 197, 94, 0.3);
+        }
+
+        .konami-reward.show {
+            display: block;
+            animation: popIn 0.5s ease-out;
+        }
+
+        @keyframes popIn {
+            from { opacity: 0; transform: translate(-50%, -50%) scale(0.8); }
+            to { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+        }
+
+        /* Responsive */
+        @media (max-width: 900px) {
+            .steam-showcase {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .steam-card-stack {
+                display: flex;
+                flex-direction: column;
+                height: auto;
+                gap: 1rem;
+            }
+
+            .steam-card {
+                position: relative;
+                width: 100%;
+                transform: none !important;
+                top: 0 !important;
+                left: 0 !important;
+            }
+
+            .footer-links-group {
+                gap: 2rem;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .hero-stats {
+                gap: 1.5rem;
+            }
+
+            .stat-value {
+                font-size: 2rem;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .demo-banner {
+                left: 1rem;
+                right: 1rem;
+                transform: none;
+                bottom: 1rem;
+            }
+
+            @keyframes slideInUp {
+                from { opacity: 0; transform: translateY(30px); }
+                to { opacity: 1; transform: translateY(0); }
+            }
+        }
+
+        /* Scroll animations */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <!-- Background Elements -->
+    <div class="bg-grid"></div>
+    <div class="floating-orb orb-1"></div>
+    <div class="floating-orb orb-2"></div>
+    <div class="floating-orb orb-3"></div>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-content">
+            <a href="#" class="logo">
+                <div class="logo-icon">B</div>
+                <div class="logo-text">Mr. B's <span>STEM</span></div>
+            </a>
+            <ul class="nav-links">
+                <li><a href="#about">About</a></li>
+                <li><a href="#steam">STEAM Quest</a></li>
+                <li><a href="#schedule">Schedule</a></li>
+                <li><a href="#mindset">Mindset</a></li>
+            </ul>
+            <div class="demo-badge">🚀 Demo Mode</div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <div class="hero-tag">
+                <span>Manville Middle School • Grades 5-8 • Cycle Class</span>
+            </div>
+            <h1>
+                Welcome to<br>
+                <span class="gradient-text">Mr. B's STEM Class</span>
+            </h1>
+            <p class="hero-subtitle">
+                Where students transform from consumers to creators. Build cool stuff. Think different. Break things (responsibly). Level up your brain.
+            </p>
+            <div class="hero-buttons">
+                <a href="#steam" class="btn btn-primary">
+                    🎮 Enter STEAM Quest
+                </a>
+                <a href="#about" class="btn btn-secondary">
+                    Learn More →
+                </a>
+            </div>
+            <div class="hero-stats">
+                <div class="stat easter-egg" data-secret="That's a lot of brains in one room 🧠">
+                    <div class="stat-value">150+</div>
+                    <div class="stat-label">Students Per Cycle</div>
+                </div>
+                <div class="stat easter-egg" data-secret="Each one more creative than the last ✨">
+                    <div class="stat-value">∞</div>
+                    <div class="stat-label">Projects Built</div>
+                </div>
+                <div class="stat easter-egg" data-secret="And counting... rapidly 📈">
+                    <div class="stat-value">12+</div>
+                    <div class="stat-label">Years Teaching</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="section" id="about">
+        <div class="section-header reveal">
+            <div class="section-tag">// What We Do</div>
+            <h2 class="section-title">This Isn't Your Average Class</h2>
+            <p class="section-subtitle">We explore the intersection of technology, creativity, and the entrepreneurial mindset. Also, we have fun. That's important.</p>
+        </div>
+        <div class="features-grid">
+            <div class="feature-card reveal">
+                <div class="feature-icon cyan">🤖</div>
+                <h3>AI & Technology</h3>
+                <p>Learn how to use AI as a superpower, not a crutch. Explore cutting-edge tools and understand the tech that's shaping our future.</p>
+                <div class="secret-note">Psst... robots are friends, not enemies 🤝</div>
+            </div>
+            <div class="feature-card reveal">
+                <div class="feature-icon purple">💡</div>
+                <h3>Entrepreneurship</h3>
+                <p>Think like a founder. Solve real problems. Learn that "failure" is just data for your next attempt. Build things people actually want.</p>
+                <div class="secret-note">Fun fact: Mr. B is building a business too 👀</div>
+            </div>
+            <div class="feature-card reveal">
+                <div class="feature-icon pink">🧮</div>
+                <h3>Math That Matters</h3>
+                <p>Mathematics isn't just numbers—it's the language of problem-solving. We make it click (and maybe even... enjoyable?).</p>
+                <div class="secret-note">Yes, you'll actually use this someday 📊</div>
+            </div>
+            <div class="feature-card reveal">
+                <div class="feature-icon green">🧠</div>
+                <h3>Mindset & Growth</h3>
+                <p>Your brain is like a muscle. We train it. Motivation, psychology, and the science of getting better at getting better.</p>
+                <div class="secret-note">Your potential has no ceiling 🚀</div>
+            </div>
+            <div class="feature-card reveal">
+                <div class="feature-icon orange">🎨</div>
+                <h3>Creative Building</h3>
+                <p>From coding to crafting, 3D design to digital art. If you can imagine it, you can probably build it here.</p>
+                <div class="secret-note">Glue guns are a right, not a privilege ✂️</div>
+            </div>
+            <div class="feature-card reveal">
+                <div class="feature-icon cyan">🌍</div>
+                <h3>Real-World Skills</h3>
+                <p>Collaboration. Communication. Critical thinking. The stuff that actually matters when you're adulting later.</p>
+                <div class="secret-note">Adulting is hard, we're prepping you early 💪</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- STEAM Quest Section -->
+    <section class="section steam-section" id="steam">
+        <div class="steam-showcase">
+            <div class="steam-visual reveal">
+                <div class="steam-card-stack">
+                    <div class="steam-card">
+                        <div class="steam-card-icon">🎮</div>
+                        <h4>Game Design</h4>
+                        <p>Build your own games from scratch</p>
+                    </div>
+                    <div class="steam-card">
+                        <div class="steam-card-icon">🤖</div>
+                        <h4>Robotics</h4>
+                        <p>Code robots that actually move</p>
+                    </div>
+                    <div class="steam-card">
+                        <div class="steam-card-icon">🎬</div>
+                        <h4>Digital Media</h4>
+                        <p>Create content like a pro</p>
+                    </div>
+                </div>
+            </div>
+            <div class="steam-content reveal">
+                <h2>Welcome to <span>STEAM Quest</span></h2>
+                <p>
+                    Our signature student-choice project time. You pick what you want to create. You decide how to build it. We're just here to help you level up.
+                    <br><br>
+                    <em style="color: var(--text-muted); font-size: 0.9rem;">
+                        (Translation: structured free time to be productive, creative, and build actually cool things)
+                    </em>
+                </p>
+                <div class="steam-features">
+                    <div class="steam-feature">
+                        <div class="steam-feature-icon">✨</div>
+                        <span>Choose Your Own Adventure</span>
+                    </div>
+                    <div class="steam-feature">
+                        <div class="steam-feature-icon">🛠️</div>
+                        <span>Access to All the Tools</span>
+                    </div>
+                    <div class="steam-feature">
+                        <div class="steam-feature-icon">🎯</div>
+                        <span>Build Something You're Proud Of</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Schedule Section -->
+    <section class="section" id="schedule">
+        <div class="section-header reveal">
+            <div class="section-tag">// The Flow</div>
+            <h2 class="section-title">How Class Works</h2>
+            <p class="section-subtitle">A typical cycle in Mr. B's STEM universe. Results may vary. Side effects include increased creativity.</p>
+        </div>
+        <div class="schedule-grid">
+            <div class="schedule-item reveal">
+                <div class="schedule-day">Phase 1</div>
+                <div class="schedule-activity">🧠 Brain Boot</div>
+                <div class="schedule-desc">Wake up that noggin</div>
+            </div>
+            <div class="schedule-item reveal">
+                <div class="schedule-day">Phase 2</div>
+                <div class="schedule-activity">📚 Mini-Lesson</div>
+                <div class="schedule-desc">Quick knowledge drop</div>
+            </div>
+            <div class="schedule-item reveal">
+                <div class="schedule-day">Phase 3</div>
+                <div class="schedule-activity">🚀 STEAM Quest</div>
+                <div class="schedule-desc">Build mode: activated</div>
+            </div>
+            <div class="schedule-item reveal">
+                <div class="schedule-day">Phase 4</div>
+                <div class="schedule-activity">🔄 Share & Reflect</div>
+                <div class="schedule-desc">Show off your work</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quote Section -->
+    <section class="section quote-section" id="mindset">
+        <div class="quote-content reveal">
+            <p class="quote-text">
+                "The best way to predict the future is to create it."
+            </p>
+            <p class="quote-author">— Abraham Lincoln (probably) // or Peter Drucker // the internet can't decide</p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-top">
+                <div class="footer-brand">
+                    <a href="#" class="logo">
+                        <div class="logo-icon">B</div>
+                        <div class="logo-text">Mr. B's <span>STEM</span></div>
+                    </a>
+                    <p>Transforming students from consumers to creators, one project at a time. Manville Middle School, New Jersey.</p>
+                </div>
+                <div class="footer-links-group">
+                    <div class="footer-links">
+                        <h4>Quick Links</h4>
+                        <ul>
+                            <li><a href="#about">About</a></li>
+                            <li><a href="#steam">STEAM Quest</a></li>
+                            <li><a href="#schedule">Schedule</a></li>
+                            <li><a href="#mindset">Mindset</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-links">
+                        <h4>Resources</h4>
+                        <ul>
+                            <li><a href="#">Class Portal</a></li>
+                            <li><a href="#">Project Gallery</a></li>
+                            <li><a href="#">Parent Info</a></li>
+                            <li><a href="#">Contact Mr. B</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2025 Mr. B's STEM Class • Manville, NJ • Built with 💜 and probably too much caffeine</p>
+                <span class="secret" title="You found me!">If you're reading this footer... you're a superstar ⭐</span>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Demo Banner -->
+    <div class="demo-banner" id="demoBanner">
+        <span class="demo-banner-icon">🎪</span>
+        <div class="demo-banner-text">
+            <strong>Demo Mode Active!</strong> This is a preview. None of these buttons actually do anything... yet 😉
+        </div>
+        <button class="demo-banner-close" onclick="document.getElementById('demoBanner').style.display='none'">×</button>
+    </div>
+
+    <!-- Konami Code Easter Egg -->
+    <div class="konami-reward" id="konamiReward">
+        <h2 style="margin-bottom: 1rem;">🎉 You Found It! 🎉</h2>
+        <p style="color: var(--text-secondary); margin-bottom: 1rem;">The Konami Code still works in 2025.<br>Mr. B would be proud.</p>
+        <p style="font-size: 2rem; margin-bottom: 1rem;">+100 Bonus Points*</p>
+        <p style="font-size: 0.75rem; color: var(--text-muted);">*Points are imaginary but the achievement is real</p>
+        <button class="btn btn-primary" style="margin-top: 1rem;" onclick="document.getElementById('konamiReward').classList.remove('show')">Nice 👊</button>
+    </div>
+
+    <script>
+        // Scroll reveal animation
+        const revealElements = document.querySelectorAll('.reveal');
+        
+        const revealOnScroll = () => {
+            revealElements.forEach(el => {
+                const elementTop = el.getBoundingClientRect().top;
+                const windowHeight = window.innerHeight;
+                
+                if (elementTop < windowHeight - 100) {
+                    el.classList.add('visible');
+                }
+            });
+        };
+
+        window.addEventListener('scroll', revealOnScroll);
+        revealOnScroll(); // Initial check
+
+        // Konami Code Easter Egg
+        const konamiCode = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'b', 'a'];
+        let konamiIndex = 0;
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === konamiCode[konamiIndex]) {
+                konamiIndex++;
+                if (konamiIndex === konamiCode.length) {
+                    document.getElementById('konamiReward').classList.add('show');
+                    konamiIndex = 0;
+                }
+            } else {
+                konamiIndex = 0;
+            }
+        });
+
+        // Console Easter Egg
+        console.log('%c👋 Hey there, curious coder!', 'font-size: 24px; font-weight: bold; color: #00f5ff;');
+        console.log('%cIf you\'re looking at the console, you\'re already thinking like a developer.', 'font-size: 14px; color: #a855f7;');
+        console.log('%cPro tip: Try the Konami Code on this page 🎮', 'font-size: 12px; color: #64748b;');
+        console.log('%c↑↑↓↓←→←→BA', 'font-size: 10px; color: #64748b;');
+    </script>
+</body>
+</html>
